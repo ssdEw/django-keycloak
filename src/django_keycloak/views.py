@@ -115,6 +115,10 @@ class Logout(RedirectView):
 
         logout(self.request)
 
+        redirect = self.request.GET.get('redirect', None)
+        if redirect:
+            return redirect
+
         if settings.LOGOUT_REDIRECT_URL:
             return resolve_url(settings.LOGOUT_REDIRECT_URL)
 
